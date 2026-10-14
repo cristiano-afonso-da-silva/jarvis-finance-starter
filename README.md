@@ -1,33 +1,42 @@
-# JARVIS 零用錢控制器 · 第三課 Starter
-這是教學用 starter，初始只顯示旋轉HUD、交易確認掃描及可自選主色、餘額、交易表單、表格。記帳CRUD/localStorage已完成；圖表、目標、AI UI留作課堂任務。
-## 啟動（Windows）
-解壓到 AI Course/My Money Manager/jarvis-finance-starter。VS Code → File → Open Folder，選有 package.json 的那層。
-沿用已有Node.js；Vite7要求Node20.19+或22.12+，本包用Node24驗證。Terminal逐行：
-```
+# Lesson 3 — JARVIS Allowance Controller
+
+A futuristic allowance controller for secondary-school students. The website is English.
+
+## Start here
+
+Open **PROMPTS.md** after cloning. It contains EVERY classroom prompt in order, including the complete student starter prompt. Colour presets and a custom colour picker are part of Prompt 00. Do not paste every stage at once.
+
+A working first-stage app is included as a fallback: HUD, colour controls and transaction ledger. Charts, savings targets and the advisor are compiling placeholders. Use Prompt 00 to generate/refine your starter with your chosen name and colour; then follow the numbered stages.
+
+## Run on Windows
+
+Open the folder containing package.json in VS Code. Use a compatible Node version (Vite 7 requires Node 20.19+ or 22.12+; this project was checked on Node 24).
+
+```sh
 npm install
 npm run dev
 ```
-開 http://localhost:5173；Ctrl+C停止。npm run build檢查編譯；npm test檢查財務計算。
-GitHub流程：老師課前建立獨立repository，學生Fork→Clone。不要覆蓋第二課智能時間表。
-首次有今日收入$100。Log transaction是記帳，不是Login。$是統一課堂示例；若改MOP/HKD，只改顯示，不做外匯。
-## 次序
-STARTER_PROMPT.md：老師生成模板用。
-LESSON_PROMPTS.md：學生逐段貼Copilot，Charts→Goal→Advisor。
-teacher/：老師救援參考；將單個檔案內容複製到 src/components 的同名檔案。先做再看，不一次完成全部。
-Recharts/GenAI SDK已預先列入dependencies，課前安裝。src/money.ts以cents計算；server.mjs提供老師預備API基建。
-## 真正AI（老師課前）
-複製.env.example→.env，預設AI_MODE=mock。
-要真正連線：AI_MODE=live；填GEMINI_API_KEY；GEMINI_MODEL填老師Google AI Studio帳戶可用模型名稱；重啟npm run dev。
-key只在server；不要放browser、VITE_變數、Git或截圖。學生無需建立AI帳戶，老師按適用帳戶要求示範。只用虛構資料。
-mock固定回覆不是模型。live需要key、有效模型、額度及網絡；未使用使用者私有key實測live。本地教學server只綁localhost，無公開部署、登入或付款。
-## 保存與恢復
-localStorage只屬同一browser/localhost，非跨電腦同步。Git不保存帳目。不要清browser資料來除錯；重新示範可用無痕視窗，關閉後不保留。
-備份專案勿包含.env或node_modules；每階段用Git保存程式。課前安裝dependencies，課堂網絡差可用mock。
-## 官方資料
+
+Open the localhost address printed by the terminal. Ctrl+C stops the server. Check source with `npm run build` and money logic with `npm test`.
+
+The first visit seeds ONE $100 Allowance income dated today. Use fictional transactions. Log means record a transaction, not log in.
+
+## Teacher reference components
+
+`teacher/Charts.tsx`, `teacher/Goal.tsx` and `teacher/Advisor.tsx` are fallback examples. Copy only the needed file's contents into the corresponding `src/components` file. The examples' relative imports are designed for that destination. Students implement one module at a time with PROMPTS.md.
+
+## AI configuration — teacher only
+
+Copy .env.example to .env. Default AI_MODE=mock returns a clearly labelled fixed English example. For real calls set AI_MODE=live, GEMINI_API_KEY and an available GEMINI_MODEL; restart the server. Do not put keys in browser code, VITE_ variables, Git or prompts. Real calls need a valid model, key, quota and network; no live call was tested with your private key.
+
+All generated advice is requested in English. The student retains the final judgment. The local server listens on localhost; this is not a deployed payment/banking service.
+
+## Storage
+
+Transactions use integer cents and browser localStorage. Accent is saved under jarvis-accent. Git saves source, not the browser ledger. The previous ledger key is retained for compatibility; user-entered text is not silently translated or deleted. Different browsers/devices do not automatically sync.
+
+## References
+
 https://github.com/recharts/recharts
 https://googleapis.github.io/js-genai/
 https://ai.google.dev/gemini-api/docs/generate-content/structured-output
-
-## V2 介面
-參考futuristic HUD語言：同心圓、電路、狀態列。主色有4個preset及自訂色，保存在jarvis-accent。使用原space-bank-v1帳目key保留舊版同browser資料。
-控制器動畫不是AI回覆；真AI只在Advisor live連線成功時標LIVE。此為課堂自製介面，不含任何官方角色資產。

@@ -1,5 +1,5 @@
 import type {Transaction} from '../types';
 export default function Charts(_props:{rows:Transaction[]}) {
- // TODO(STUDENT-CHART): 讓 AI 加入 Recharts；先 bar，完成後再選 pie。
+ // TODO(STUDENT-CHART): Ask AI to add Recharts; start with a bar chart, then optionally add a pie chart.
  return null;
 }
